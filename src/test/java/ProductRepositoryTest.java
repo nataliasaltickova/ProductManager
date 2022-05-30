@@ -87,6 +87,23 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void shouldWhenRemoveByIdMissingProduct() {
+        ProductRepository repository = new ProductRepository();
+
+        Product product1 = new Product(2, "tyyt", 565);
+        Product product2 = new Smartphone(5, "tttt", 555, "nnnb");
+
+        repository.save(product1);
+        repository.save(product2);
+
+
+        assertThrows(NotFoundException.class, () -> {
+            repository.removeById(3);
+        });
+    }
+
+
+    @Test
     void shouldWhenRemoveByIdOneProductOfTheOne() {
         ProductRepository repository = new ProductRepository();
         ProductManager manager = new ProductManager(repository);
